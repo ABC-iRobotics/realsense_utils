@@ -3,9 +3,9 @@ Modules and info for Intel RealSense cameras
 
 ### Installation steps
 
-Install pyrealsense2==2.33.1.1388.
+Install pyrealsense2
 
- - Install with pip:
+ - With pip:
     ```bash
     pip install pyrealsense2
     ```
