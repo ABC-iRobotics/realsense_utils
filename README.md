@@ -59,4 +59,4 @@ Calling the script with the -playback option enables to check the contents of th
 
 ### Input module usage
 
-Use 'test.py' to test the basic functions and the input module.  
+Use `test.py` to test the basic functions and the `realsense_intrinsics_module.py` module.  
