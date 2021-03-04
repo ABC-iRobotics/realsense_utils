@@ -1,11 +1,3 @@
-## 
-## @package obstacle-detection
-#  Functions for intrisics support
-
-
-##
-# Import OpenCV, librealsense, numpy and logging
-
 import pyrealsense2 as rs
 import numpy as np
 import cv2
