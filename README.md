@@ -57,3 +57,6 @@ In this case the data from the camera will be recorded in a new folder called `d
 
 Calling the script with the -playback option enables to check the contents of the previously recorded .bag files. The file can be selected with the -filename argument.
 
+### Input module usage
+
+Use 'test.py' to test the basic functions and the input module.  
