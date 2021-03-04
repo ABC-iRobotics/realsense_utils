@@ -1,6 +1,7 @@
 # realsense_utils
 Modules and info for Intel RealSense cameras
 
+Install pyrealsense2==2.33.1.1388 (with pip using pip install pyrealsense2).
 
 After the installation is complete, the pre-built packages of librealsense should be installed. For this follow the instructions [here](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md), like this:
 
