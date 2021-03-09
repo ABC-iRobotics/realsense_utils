@@ -1,4 +1,4 @@
-# realsense_utils
+# Realsense uils
 Modules and info for Intel RealSense cameras
 
 ### Installation steps
@@ -48,22 +48,83 @@ realsense-viewer
 ```
 in the command line. When the Realsense camera is connected to the machine its data should be available in Realsense-Viewer.
 
-### Cameras and data_collection
 
-Use the `data_collection_realsense.py` module to check if the program can work with the Realsense camera or not:
-```bash
-python data_collection_realsense.py
+### Required python packages:
+ - pyrealsense2
+ - numpy
+ - opencv-python (only for the test visualization, the Relasense utilities can be used without opencv)
+
+### Using the camera with python
+
+Import the `realsense_control` module to your python code to be able to use the utility functions for Realsense cameras:
+```python
+import realsense_control
 ```
-If the script is called without arguments it can be used to check if the data from the Realsense camera can be received.
 
-The script can be used to record data for further processing, if it is called like:
-```bash
-python data_collection_realsense.py -record
+Use  the provided RealsenseController class for ease of use:
+```python
+from realsense_control import RealsenseController
+
+...
+
+realsense = RealsenseController()
+realsense.initialize()
+rgb,depth = realsense.get_frames()
 ```
-In this case the data from the camera will be recorded in a new folder called `data` in a .bag file. It also saves the incoming data from the sensor fusion in a .txt file in the root of the repository. The name of the files can be set by the -filename argument.
 
-Calling the script with the -playback option enables to check the contents of the previously recorded .bag files. The file can be selected with the -filename argument.
+The other functions inside the `realsense_control` can also be imported and used for low-level access:
 
-### Input module usage
+```python
+import realsense_control
 
-Use `test.py` to test the basic functions and the `realsense_input_module.py` module. With the functions of `realsense_intrinsics_module.py` the camera's intrinsic parameters are available. 
+...
+
+# Config camera and start streaming
+config = realsense_control.get_config()
+pipeline = realsense_control.get_pipeline()
+realsense_control.enable_stream_realsense(config)
+pipeline.start(config)
+
+```
+
+RealsenseController instances can be configured to use a real camera (default behavior):
+
+```
+realsense.initialize()
+```
+
+or to use a previously saved `bag` file to configure a virtual camera for playback:
+
+```
+realsense.initialize(bag_file_path='path/to/bag/file')
+```
+
+In order to save the stream to a bag file provide a path to the output bag file:
+```
+realsense.initialize(output_bag_file_path='path/to/output.bag')
+```
+
+While saving to a file, the `get_frames()` function can still be used.
+
+The playback functionality and saving to a bag file **do not work at the same time**. If both are provided **only playback is performed**.
+
+Use the parameters of the `initialize` function to set the resolution and framerate of the stream:
+```
+realsense.initialize(width=640, height=480, frame_rate=30)
+```
+
+**In playback mode the provided resolution and framerate should match with the resolution and framerate during the recording.**
+
+### Test
+
+The `test.py` script contains a simple example that shows how to use the `realsense_control` module. To run the test call:
+
+```bash
+python test.py
+```
+
+in the command line.
+
+### Help
+
+See the code documentation inside the `realsense_control.py` script for further info
